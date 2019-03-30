@@ -1,0 +1,229 @@
+/*font-family: 'Roboto', sans-serif;
+font-family: 'Gloria Hallelujah', cursive;
+font-family: 'Caveat', cursive;*/
+* {
+  box-sizing: border-box;
+}
+body {
+  background: rgb(88, 88, 88);
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+}
+
+header span {
+  display: block;
+  color: rgb(88, 88, 88);
+  font-size: 0.75em;
+  margin-bottom: 0.25em;
+  padding-right: 0.5em;
+  text-align: right;
+}
+
+h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 2em;
+  margin: 0;
+  margin-bottom: 0.15em;
+  margin-top: 0.25em;
+  text-align: left;
+  transition: all 0.25s;
+}
+
+img {
+  width: 100%;
+}
+
+textarea {
+  border-radius: 0.25em;
+  -moz-box-shadow: 0px 2px 6px 2px #cfcfcf;
+  -webkit-box-shadow: 0px 2px 6px 2px #cfcfcf;
+  box-shadow: 0px 2px 6px 2px #cfcfcf;
+  color: rgb(88, 88, 88);
+  font-size: 0.8em;
+  height: 250px;
+  line-height: 1.5;
+  margin: 0 auto;
+  padding: 0.75em 1em;
+  width: 99%;
+}
+
+.textarea-frame {
+  text-align: center;
+}
+
+button {
+  background-color: rgb(0, 176, 80);
+  border: 1px solid rgb(88, 88, 88);
+  border-radius: 0.25em;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 0.65em;
+  max-width: 400px;
+  padding: 1em 1.25em;
+  transition: all 0.5s;
+  width: 100%;
+}
+
+button:hover {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1 1 1 rgb(0, 0, 0);
+  color: rgb(0, 176, 80);
+  -moz-box-shadow: inset 0 1 2px rgb(88, 88, 88);
+  -webkit-box-shadow: inset 0 1 2px rgb(88, 88, 88);
+  box-shadow: inset 0 0 2px rgb(88, 88, 88);
+}
+
+main p {
+  margin-top: 2.5em;
+  padding: 0 0.25em;
+}
+
+.logo-frame {
+  margin: 0;
+  max-width: 180px;
+}
+
+.position-lock {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.creuzer-app-frame {
+  background-color: #ffffff;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000000;
+  border-radius: 0.5em;
+  -moz-box-shadow: 0px 0px 4px 1px #000000;
+  -webkit-box-shadow: 0px 0px 4px 1px #000000;
+  box-shadow: 0px 0px 4px 1px #000000;
+  margin: 0 auto;
+  margin-top: 2.5em;
+  max-width: 600px;
+  position: relative;
+  width: 100%;
+}
+
+.creuzer-app-matte {
+  margin: 1.75em auto;
+  margin-top: 0.85em;
+  width: 90%;
+  transition: all 0.5s;
+}
+
+.drop-down-frame {
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+  padding-right: 0.25em;
+  padding-top: 0.5em;
+}
+
+.custom-select {
+  position: relative;
+  display: block;
+  max-width: 400px;
+  min-width: 180px;
+  border: 1px solid #000000;
+  background-color: rgb(88, 88, 88);
+  border-radius: 0.25em;
+  z-index: 10;
+}
+
+.custom-select_transfrom-data select {
+  border: 0;
+}
+
+select {
+  border: 1px solid rgb(0, 0, 0);
+  outline: none;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  padding: 1em 3.5em 1em 0.75em;
+  line-height: 1;
+  font-size: 0.9em;
+  color: #ffffff;
+}
+.custom-select:after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1.5em;
+  height: 100%;
+  content: '\2228';
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.5em;
+  border-left: 1px solid rgb(0, 0, 0);
+  z-index: -1;
+}
+footer {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 0.8em;
+  padding: 1em 1.55em;
+}
+footer p {
+  margin: 0;
+}
+.reset-btn {
+  padding: 0.5em 0.74em;
+  position: absolute;
+  margin: 0;
+  width: auto;
+  top: 1.5em;
+  right: 1.75em;
+  background-color: rgb(0, 176, 80);
+  color: rgb(255, 255, 255);
+}
+.error-message {
+  text-align: right;
+  color: rgb(255, 0, 0);
+  margin-top: 0.25em;
+}
+.stepTwo {
+  padding: 0 0.5em;
+}
+
+@media screen and (min-width: 500px) {
+  h1 {
+    font-size: 2.5em;
+  }
+  .creuzer-app-matte {
+    margin-top: 1em;
+  }
+}
+@media screen and (min-width: 560px) {
+  h1 {
+    font-size: 3em;
+    margin-bottom: 0;
+  }
+  .button-frame {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.52em;
+  }
+  .button-frame > button {
+    margin: 0 0.25em;
+    flex-grow: 1;
+    width: 20%;
+  }
+  button {
+    font-size: 0.9em;
+  }
+  .button-frame button.button_lg {
+    flex-grow: 2;
+  }
+  footer {
+    padding: 1em 3em;
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Caveat|Gloria+Hallelujah|Roboto:400,600"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/app-styles.css" />
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+    <div id="app">
+      <div class="creuzer-app-frame">
+        <div class="creuzer-app-matte">
+          <figure class="logo-frame">
+            <img src="assets/img/Sercante.png" />
+          </figure>
+          <div id="vanishingContent" v-if="displayCard === 'stepOne'">
+            <header>
+              <h1>Creuz your way through data</h1>
+              <span>SFDC Report Line Splitter / Pardot Dynamic lists</span>
+            </header>
+            <main>
+              <div class="textarea-frame">
+                <textarea
+                  id="thetext"
+                  placeholder="Paste your text"
+                  v-model="data"
+                ></textarea>
+              </div>
+
+              <div class="drop-down-frame">
+                <label for="splitSize" class="custom-select">
+                  <select v-model="chunkSize">
+                    <option disabled value="">Select Data Chunk Size</option>
+                    <template v-for="(data, index) in dataSplitSizeOptions">
+                      <option :key="index">{{ data }}</option>
+                    </template>
+                  </select>
+                </label>
+              </div>
+              <p v-if="formError" class="error-message">{{ errorMessage }}</p>
+              <p>
+                Paste your text into the text box above and click the 'Split the
+                Data' button. You can try the sample data as well just to see
+                this work
+              </p>
+
+              <div class="button-frame">
+                <button @click="chunkTheData()">Split the Data</button>
+                <label
+                  for="transformDataOptions"
+                  class="custom-select custom-select_transfrom-data"
+                >
+                  <select v-model="transformOption">
+                    <option disabled value="">Select Data Manipulation</option>
+                    <template v-for="(option, index) in transformDataOptions">
+                      <option :key="index">{{ option }}</option>
+                    </template>
+                  </select>
+                </label>
+                <!-- <button @click="changeSemicolonToComma()" class="button_lg">
+                  Semicolons to Commas
+                </button> -->
+                <button @click="loadSampleData()">Sample Data</button>
+              </div>
+            </main>
+          </div>
+          <div class="stepTwo" v-if="displayCard === 'stepTwo'">
+            <button @click="handleReset()" class="reset-btn">Reset</button>
+            <div v-if="semiToColon">
+              <p>{{ data }}</p>
+            </div>
+            <div v-else>
+              <template v-for="(chunk, index) in chunkedDataList">
+                <p :key="index">{{ chunk }}</p>
+              </template>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <p>&copy; 2019 Secante</p>
+        </footer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          displayCard: 'stepOne',
+          dataSplitSizeOptions: ['250', '1000'],
+          data: '',
+          chunkedDataList: [],
+          transformDataOptions: [
+            'Semicolons to Commas',
+            'Commas to Semicolons'
+          ],
+          transformOption: '',
+          chunkSize: '',
+          semiToColon: false,
+          formError: false,
+          errorMessage: 'Please select a charater limit value'
+        },
+        methods: {
+          loadSampleData: function() {
+            this.data = // eslint-disable-next-line quotes
+              "Afghanistan, Albania, Algeria, American Samoa, Andorra, Angola, Anguilla, Antarctica, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bosnia and Herzegovina, Botswana, Bouvet Island, Brazil, British Indian Ocean Territory, Brunei Darussalam, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Cayman Islands, Central African Republic, Chad, Chile, China, Christmas Island, Cocos (Keeling) Islands, Colombia, Comoros, Congo, Congo, The Democratic Republic of The, Cook Islands, Costa Rica, Cote D'ivoire, Croatia, Cuba, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Falkland Islands(Malvinas), Faroe Islands, Fiji, Finland, France, French Guiana, French Polynesia, French Southern Territories, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guinea, Guinea- bissau, Guyana, Haiti, Heard Island and Mcdonald Islands, Holy See(Vatican City State), Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Islamic Republic of, Iraq, Ireland, Israel, Italy, Jamaica, Japan, Jordan, Kazakhstan, Kenya, Kiribati, Korea, Democratic People's Republic of, Korea, Republic of, Kuwait, Kyrgyzstan, Lao People's Democratic Republic, Latvia, Lebanon, Lesotho, Liberia, Libyan Arab Jamahiriya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, The Former Yugoslav Republic of, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Marshall Islands, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Federated States of, Moldova, Republic of, Monaco, Mongolia, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Niue, Norfolk Island, Northern Mariana Islands, Norway, Oman, Pakistan, Palau, Palestinian Territory, Occupied, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Pitcairn, Poland, Portugal, Puerto Rico, Qatar, Reunion, Romania, Russian Federation, Rwanda, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Pierre and Miquelon, Saint Vincent and The Grenadines, Samoa, San Marino, Sao Tome and Principe, Saudi Arabia, Senegal, Serbia and Montenegro, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Solomon Islands, Somalia, South Africa, South Georgia and The South Sandwich Islands, Spain, Sri Lanka, Sudan, Suriname, Svalbard and Jan Mayen, Swaziland, Sweden, Switzerland, Syrian Arab Republic, Taiwan, Province of China, Tajikistan, Tanzania, United Republic of, Thailand, Timor- leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Turks and Caicos Islands, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom, United States, United States Minor Outlying Islands, Uruguay, Uzbekistan, Vanuatu, Venezuela, Viet Nam, Virgin Islands, British, Virgin Islands, U.S., Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe";
+          },
+          chunkTheData: function() {
+            this.chunkedDataList = [];
+            if (this.chunkSize && this.data.length > 0) {
+              this.checkForCommaOrSemi();
+              var originalString = this.data;
+              var chunk = '';
+              var subString = '';
+              var n = '';
+              this.displayCard = 'stepTwo';
+              var num = parseInt(this.chunkSize);
+              console.log('num', num);
+              var counter = 0;
+              while (originalString.length > 0) {
+                chunk = originalString.substring(0, this.chunkSize);
+                if (this.transformOption === 'Semicolons to Commas')
+                  if (chunk.length >= this.chunkSize) {
+                    n = chunk.lastIndexOf(',');
+                  } else {
+                    n = chunk.length;
+                  }
+
+                if (this.transformOption === 'Commas to Semicolons')
+                  if (chunk.length >= this.chunkSize) {
+                    n = chunk.lastIndexOf(';');
+                  } else {
+                    n = chunk.length;
+                  }
+
+                originalString.substring(0, n);
+                this.chunkedDataList.push(originalString.substring(0, n));
+                originalString = originalString
+                  .substring(n)
+                  .replace(/(^,)|(^;)|(;$)|(,$)/, '');
+                counter++;
+                if (counter >= 100 || originalString.length === 0) {
+                  break;
+                }
+              }
+            } else {
+              this.formError = true;
+            }
+          },
+          checkForCommaOrSemi: function() {
+            for (char of this.data) {
+              if (char === ',') {
+                this.transformOption = 'Semicolons to Commas';
+              }
+              if (char === ';') {
+                this.transformOption = 'Commas to Semicolons';
+              }
+            }
+          },
+          changeSemicolonToComma: function() {
+            this.data = this.data.replace(/;/g, ',');
+            //this.semiToColon = true;
+            // this.displayCard = 'stepTwo';
+          },
+          changeCommaToSemicolon: function() {
+            this.data = this.data.replace(/,/g, ';');
+            //this.semiToColon = true;
+            //this.displayCard = 'stepTwo';
+          },
+          handleReset: function() {
+            this.displayCard = 'stepOne';
+            this.chunkSize = '';
+            this.transformOption = '';
+          }
+        },
+        watch: {
+          // whenever question changes, this function will run
+          chunkSize: function() {
+            if (this.chunkSize) {
+              this.formError = false;
+            }
+          },
+          // whenever question changes, this function will run
+          transformOption: function() {
+            console.log(this.transformOption);
+            switch (this.transformOption) {
+              case 'Commas to Semicolons':
+                this.changeCommaToSemicolon();
+                break;
+              case 'Semicolons to Commas':
+                this.changeSemicolonToComma();
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
