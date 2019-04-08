@@ -30,6 +30,7 @@
           <figure class="logo-frame">
             <img src="assets/img/Sercante.png" />
           </figure>
+          <!--stepOne-->
           <div id="vanishingContent" v-if="displayCard === 'stepOne'">
             <header>
               <h1>Creuz your way through data</h1>
@@ -43,7 +44,6 @@
                   v-model="userData"
                 ></textarea>
               </div>
-
               <div class="drop-down-frame">
                 <label for="splitSize" class="custom-select">
                   <select v-model="chunkSize">
@@ -60,7 +60,6 @@
                 Data' button. You can try the sample data as well just to see
                 this work
               </p>
-
               <div class="button-frame">
                 <button @click="checkForData()">Split the Data</button>
                 <label
@@ -74,24 +73,50 @@
                     </template>
                   </select>
                 </label>
-                <!-- <button @click="changeSemicolonToComma()" class="button_lg">
-                  Semicolons to Commas
-                </button> -->
                 <button @click="loadSampleData()">Sample Data</button>
               </div>
             </main>
           </div>
+          <!--/stepOne-->
+          <!--stepTwo-->
           <div class="stepTwo" v-if="displayCard === 'stepTwo'">
-            <button @click="handleReset()" class="reset-btn">Reset</button>
             <div v-if="semiToColon">
               <p>{{ data }}</p>
             </div>
-            <div v-else>
+            <!-- <div v-else>
               <template v-for="(chunk, index) in chunkedDataList">
+                <span>{{ chunkedDataList.length }}</span>
+                <button class="copy-button">copy text</button>
                 <p :key="index">{{ chunk }}</p>
               </template>
+            </div> -->
+            <div v-else class="p-b-2">
+              <div class="flex-box_between p-xt-2">
+                <div>
+                  <span
+                    >section {{ dataChunkIndex + 1 }} of
+                    {{ chunkedDataList.length }}</span
+                  >
+                </div>
+                <div class="flex-box">
+                  <button class="prev-btn" @click="handlePrev()">
+                    &lt;
+                  </button>
+                  <button class="next-btn" @click="handleNext()">
+                    &gt;
+                  </button>
+                </div>
+              </div>
+              <p id="dataChunk" class="data-chunk-frame">{{ dataChunk }}</p>
+              <div class="p-xt-1">
+                <button @click="handleReset()" class="reset-btn">
+                  Reset
+                </button>
+                <button class="copy-btn">copy</button>
+              </div>
             </div>
           </div>
+          <!--stepTwo-->
         </div>
         <footer>
           <p>&copy; 2019 Secante</p>
@@ -113,6 +138,8 @@
           ],
           transformOption: '',
           chunkSize: '',
+          dataChunk: '',
+          dataChunkIndex: -1,
           semiToColon: false,
           formError: false,
           errorMessage: ''
@@ -124,6 +151,7 @@
           },
           chunkTheData: function() {
             this.chunkedDataList = [];
+            this.dataChunkIndex = 0;
             this.checkForCommaOrSemi();
             var originalString = this.userData;
             var chunk = '';
@@ -131,7 +159,6 @@
             var n = '';
             this.displayCard = 'stepTwo';
             var num = parseInt(this.chunkSize);
-            console.log('num', num);
             var counter = 0;
             while (originalString.length > 0) {
               chunk = originalString.substring(0, this.chunkSize);
@@ -160,7 +187,7 @@
               }
             }
           },
-          checkForData() {
+          checkForData: function() {
             if (!this.userData) {
               this.formError = true;
               this.errorMessage = 'Silly human. No data. No data spliting';
@@ -195,6 +222,22 @@
             this.displayCard = 'stepOne';
             this.chunkSize = '';
             this.transformOption = '';
+            this.chunkedDataList = [];
+            this.dataChunkIndex = 0;
+          },
+          handleNext: function() {
+            if (this.dataChunkIndex < this.chunkedDataList.length - 1) {
+              this.dataChunkIndex += 1;
+            } else {
+              console.log('you have reached the end');
+            }
+          },
+          handlePrev: function() {
+            if (this.dataChunkIndex > 0) {
+              this.dataChunkIndex -= 1;
+            } else {
+              console.log('you have reached the start');
+            }
           }
         },
         watch: {
@@ -208,6 +251,10 @@
             if (this.userData) {
               this.formError = false;
             }
+          },
+          dataChunkIndex: function() {
+            console.log(this.dataChunkIndex);
+            this.dataChunk = this.chunkedDataList[this.dataChunkIndex];
           },
           // whenever question changes, this function will run
           transformOption: function() {
