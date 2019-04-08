@@ -27,7 +27,7 @@
     <div id="app">
       <div class="creuzer-app-frame">
         <div class="creuzer-app-matte">
-          <figure class="logo-frame">
+          <figure class="logo-frame" @click="handleReset()">
             <img src="assets/img/Sercante.png" />
           </figure>
           <!--stepOne-->
@@ -80,25 +80,16 @@
           <!--/stepOne-->
           <!--stepTwo-->
           <div class="stepTwo" v-if="displayCard === 'stepTwo'">
-            <div v-if="semiToColon">
-              <p>{{ data }}</p>
-            </div>
-            <!-- <div v-else>
-              <template v-for="(chunk, index) in chunkedDataList">
-                <span>{{ chunkedDataList.length }}</span>
-                <button class="copy-button">copy text</button>
-                <p :key="index">{{ chunk }}</p>
-              </template>
-            </div> -->
-            <div v-else class="p-b-2">
+            <div class="p-b-2" v-if="!showAll">
               <div class="flex-box_between p-xt-2">
-                <div>
-                  <span
-                    >section {{ dataChunkIndex + 1 }} of
-                    {{ chunkedDataList.length }}</span
-                  >
+                <div class="align-self_end">
+                  <span>
+                    {{ dataChunkIndex + 1 }} of
+                    {{ chunkedDataList.length }}
+                  </span> 
+                  <a @click="showAll = !showAll" class="show-all">show all</a>
                 </div>
-                <div class="flex-box">
+                <div class="flex-box align-self_end">
                   <button class="prev-btn" @click="handlePrev()">
                     &lt;
                   </button>
@@ -107,13 +98,22 @@
                   </button>
                 </div>
               </div>
-              <p id="dataChunk" class="data-chunk-frame">{{ dataChunk }}</p>
+              <textarea id="dataChunk" class="data-chunk-frame" readonly :value="dataChunk"></textarea>
               <div class="p-xt-1">
                 <button @click="handleReset()" class="reset-btn">
                   Reset
                 </button>
-                <button class="copy-btn">copy</button>
+                <button class="copy-btn" @click="handleCopy()">copy</button>
               </div>
+            </div>
+            <div class="p-b-2 p-xt-2" v-else>
+                <div class="p-b-2" v-for="(chunk, index) in chunkedDataList">
+                  <textarea :id="'chunk' + index" class="data-chunk-frame" readonly :value="chunk"></textarea> 
+                  <button @click="handleReset()" class="reset-btn" v-if="index === chunkedDataList.length -1">
+                    Reset
+                  </button> 
+                  <button class="copy-btn" @click="handleCopy(index)">copy</button>  
+                </div>
             </div>
           </div>
           <!--stepTwo-->
@@ -142,7 +142,8 @@
           dataChunkIndex: -1,
           semiToColon: false,
           formError: false,
-          errorMessage: ''
+          errorMessage: '',
+          showAll: false
         },
         methods: {
           loadSampleData: function() {
@@ -180,7 +181,7 @@
               this.chunkedDataList.push(originalString.substring(0, n));
               originalString = originalString
                 .substring(n)
-                .replace(/(^,)|(^;)|(;$)|(,$)/, '');
+                .replace(/(^,)|(^;)|(;$)|(,$)/, '').trim();
               counter++;
               if (counter >= 100 || originalString.length === 0) {
                 break;
@@ -221,23 +222,51 @@
           handleReset: function() {
             this.displayCard = 'stepOne';
             this.chunkSize = '';
+            this.userData = '';
             this.transformOption = '';
             this.chunkedDataList = [];
-            this.dataChunkIndex = 0;
+            this.dataChunkIndex = -1;
+            this.dataChunk = '',
+            this.showAll = false,
+            this.semiToColon = false,
+            this.formError = false,
+            this.errorMessage = ''
           },
           handleNext: function() {
             if (this.dataChunkIndex < this.chunkedDataList.length - 1) {
               this.dataChunkIndex += 1;
             } else {
-              console.log('you have reached the end');
+              return
             }
           },
           handlePrev: function() {
             if (this.dataChunkIndex > 0) {
               this.dataChunkIndex -= 1;
             } else {
-              console.log('you have reached the start');
+              return
             }
+          }, 
+          handleCopy: function( index ) {
+            if (!this.showAll) {
+              var testingCodeToCopy = document.querySelector('#dataChunk')
+              testingCodeToCopy.setAttribute('type', 'text')
+              testingCodeToCopy.select()
+            } else {
+              var testingCodeToCopy = document.querySelector(`#chunk${index}`)
+              testingCodeToCopy.setAttribute('type', 'text')
+              testingCodeToCopy.select() 
+            }
+            try {
+              var successful = document.execCommand('copy');
+              var msg = successful ? 'successful' : 'unsuccessful';
+              console.log('Testing code was copied ' + msg);
+            } catch (err) {
+              console.log('Oops, unable to copy');
+            }
+
+            /* unselect the range */
+            testingCodeToCopy.setAttribute('type', 'hidden')
+            window.getSelection().removeAllRanges()
           }
         },
         watch: {
@@ -253,18 +282,19 @@
             }
           },
           dataChunkIndex: function() {
-            console.log(this.dataChunkIndex);
             this.dataChunk = this.chunkedDataList[this.dataChunkIndex];
           },
           // whenever question changes, this function will run
           transformOption: function() {
-            console.log(this.transformOption);
             switch (this.transformOption) {
               case 'Commas to Semicolons':
                 this.changeCommaToSemicolon();
                 break;
               case 'Semicolons to Commas':
                 this.changeSemicolonToComma();
+                break;
+              default:
+                break;
             }
           }
         }

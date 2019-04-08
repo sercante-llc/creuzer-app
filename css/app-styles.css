@@ -43,6 +43,9 @@ button:hover {
 }
 
 /*_______________________ generic classes _______________________*/
+.align-self_end {
+  align-self: flex-end;
+}
 .flex-box_between {
   display: flex;
   justify-content: center;
@@ -99,6 +102,7 @@ button:hover {
 .logo-frame {
   margin: 0;
   max-width: 180px;
+  cursor: pointer;
 }
 
 /*_______________________ header _______________________*/
@@ -228,6 +232,14 @@ main p.error-message {
 .stepTwo {
   padding: 0 0.5em;
 }
+.show-all {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #666;
+  font-size: .85em;
+  margin-left: 1em;
+}
 .reset-btn,
 .copy-btn {
   color: rgb(255, 255, 255);
@@ -238,6 +250,15 @@ main p.error-message {
 .reset-btn {
   background-color: rgb(255, 0, 0);
 }
+.reset-btn:hover {
+  color: rgb(255, 0, 0);
+}
+.copy-btn {
+  background-color: rgb(88, 88, 88);
+}
+.copy-btn:hover {
+  color: rgb(88, 88, 88);
+}
 .data-chunk-frame {
   border-radius: 0.25em;
   -moz-box-shadow: 0px 2px 6px 2px #cfcfcf;
@@ -246,8 +267,10 @@ main p.error-message {
   color: rgb(88, 88, 88);
   font-size: 0.8em;
   margin: 0.5rem auto;
-  padding: 0.75em 1em;
+  padding: 0.75em 1em 3.5em;
   width: 99%;
+  height: auto;
+  
 }
 .prev-btn,
 .next-btn {
