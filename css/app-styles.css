@@ -8,7 +8,7 @@ font-family: 'Caveat', cursive;*/
 body {
   background: rgb(2, 42, 56);
   color: rgb(0, 0, 0);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -17,7 +17,7 @@ img {
 }
 button {
   background-color: rgb(236, 72, 118);
-  border: 1px solid rgb( 0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 0.25em;
   color: rgb(255, 255, 255);
   cursor: pointer;
@@ -26,12 +26,12 @@ button {
   margin-top: 0.65em;
   max-width: 400px;
   padding: 1em 1.25em;
-  transition: all .3s;
+  transition: all 0.3s;
   width: 100%;
 }
 button:hover {
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb( 236, 72, 118);
+  border: 1px solid rgb(236, 72, 118);
   color: rgb(236, 72, 118);
   /* box-shadow: 1 1 1 rgb(0, 0, 0);
   -moz-box-shadow: inset 0 1 2px rgb(88, 88, 88);
@@ -68,6 +68,22 @@ button:hover {
   text-align: right;
 }
 
+/*_______________________ animations _______________________*/
+/* @keyframes anchor-underline {
+  0%, 10% {
+    left: 0;
+    right: 100%;
+  }
+  40%, 60% {
+    left: 0;
+    right: 0;
+  }
+  90%, 100% {
+    left: 100%;
+    right: 0;
+  }
+} */
+
 /*_______________________ app framing _______________________*/
 .creuzer-app-frame {
   background-color: #ffffff;
@@ -78,7 +94,7 @@ button:hover {
   -webkit-box-shadow: 0px 0px 4px 1px #000000;
   box-shadow: 0px 0px 4px 1px #000000;
   margin: 0 auto;
-  margin-top: 2.5em;
+  margin-top: 1.5em;
   max-width: 800px;
   position: relative;
   width: 100%;
@@ -87,7 +103,6 @@ button:hover {
   margin: 1.75em auto;
   margin-top: 0.85em;
   width: 90%;
-  transition: all 0.5s;
 }
 @media screen and (min-width: 500px) {
   .creuzer-app-matte {
@@ -104,13 +119,11 @@ button:hover {
 
 /*_______________________ header _______________________*/
 header h1 {
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-size: 2em;
+  line-height: 1;
   margin: 0;
-  margin-bottom: 0.15em;
-  margin-top: 0.25em;
   text-align: left;
-  transition: all 0.25s;
 }
 
 header p:last-of-type {
@@ -129,9 +142,9 @@ header ol {
   padding: 0;
 }
 header ol li {
-  list-style:none;
-  margin:0;
-  padding: 0 0 .5em 4em;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.5em 4em;
   position: relative;
 }
 
@@ -140,48 +153,57 @@ header ol li:before {
   left: 0;
   position: absolute;
 }
-header ol li:nth-child(1):before {
-  display:inline-block;
+header ol li:nth-child(1)::before {
+  display: inline-block;
   content: "Step 1:";
-  margin-right:.8em;
+  margin-right: 0.8em;
 }
-header ol li:nth-child(2):before {
-  display:inline-block;
+header ol li:nth-child(2)::before {
+  display: inline-block;
   content: "Step 2:";
-  margin-right:.8em;
+  margin-right: 0.8em;
 }
-header ol li:nth-child(3):before {
-  display:inline-block;
+header ol li:nth-child(3)::before {
+  display: inline-block;
   content: "Step 3:";
-  margin-right:.8em;
+  margin-right: 0.8em;
 }
-header ol li:nth-child(4):before {
-  display:inline-block;
+header ol li:nth-child(4)::before {
+  display: inline-block;
   content: "Step 4:";
-  margin-right:.8em;
+  margin-right: 0.8em;
+}
+header ol li:last-of-type {
+  padding-bottom: 0;
 }
 header ol li span {
   display: inline;
-  font-size: .8em;
+  font-size: 0.8em;
   text-align: left;
 }
 header a {
+  color: rgb(0, 0, 0);
+  position: relative;
   text-decoration: none;
+  transition: color 0.4s ease-out;
 }
 header a::after {
   border-radius: 1em;
-  border-top: .1em solid rgb(0, 0, 0);
-  content: '';
+  border-top: 0.1em solid rgb(0, 0, 0);
+  content: "";
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 100%;
+  bottom: -0.14em;
   left: 0;
-  transition: right .4s cubic-bezier(0,.5,0,5);
+  transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
 }
 header a:hover {
+  color: rgb(33, 186, 64);
   text-decoration: none;
 }
 header a:hover::after {
+  border-color: rgb(33, 186, 64);
+  /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
   right: 0;
 }
 
@@ -189,11 +211,12 @@ header a:hover::after {
   header h1 {
     font-size: 2.5em;
   }
-  header p, header ol li {
-    font-size: 1.25em;
+  header p,
+  header ol li {
+    font-size: 1.15em;
   }
   header ol {
-  margin-left: .75em;
+    margin-left: 0.75em;
   }
 }
 @media screen and (min-width: 560px) {
@@ -232,7 +255,7 @@ main .custom-select {
   display: block;
   max-width: 400px;
   min-width: 180px;
-  border: 1px solid rgb(0,0,0);
+  border: 1px solid rgb(0, 0, 0);
   background-color: rgb(48, 169, 179);
   border-radius: 0.25em;
   z-index: 10;
@@ -255,10 +278,11 @@ main select {
   line-height: 1;
   font-size: 1em;
   color: inherit;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
-main select::-ms-expand { /* for IE 11 */
-    display: none;
+main select::-ms-expand {
+  /* for IE 11 */
+  display: none;
 }
 main .custom-select::after {
   position: absolute;
@@ -266,17 +290,17 @@ main .custom-select::after {
   right: 10px;
   top: 7px;
   width: 1em;
-  content: '\2228';
+  content: "\2228";
   text-align: center;
   color: #ffffff;
 }
 main .custom-select:hover {
-  border: 1px solid rgb( 48, 169, 179);
+  border: 1px solid rgb(48, 169, 179);
   background-color: rgb(255, 255, 255);
   color: rgb(48, 169, 179);
 }
 main .custom-select:hover:after {
-  color: rgb(48, 169, 179)
+  color: rgb(48, 169, 179);
 }
 main select option {
   background-color: rgb(48, 169, 179);
@@ -289,7 +313,7 @@ main p {
 }
 main p.error-message {
   padding: 0;
-  font-family: 'Gloria Hallelujah', cursive;
+  font-family: "Gloria Hallelujah", cursive;
   text-align: center;
   font-size: 1.25em;
   color: rgb(255, 0, 0);
@@ -301,10 +325,12 @@ main p.error-message {
     justify-content: space-between;
     margin-top: 2em;
   }
-  main .button-frame button, main .button-frame .custom-select {
+  main .button-frame button,
+  main .button-frame .custom-select {
     margin-top: 0em;
-}
-  main .button-frame > button, main .button-frame .custom-select {
+  }
+  main .button-frame > button,
+  main .button-frame .custom-select {
     width: 30%;
   }
 }
@@ -315,25 +341,24 @@ main p.error-message {
 }
 .show-all {
   border-bottom: 1px solid rgb(255, 255, 255);
-  color: rgb( 0, 0, 0);
+  color: rgb(0, 0, 0);
   cursor: pointer;
   display: inline-block;
   font-size: 1em;
   margin-left: 1em;
   text-decoration: none;
-  transition: border .2s ease-in-out;
+  transition: border 0.2s ease-in-out;
 }
 .show-all:hover {
   border-bottom: 1px solid rgb(88, 88, 88);
-
 }
 .disabled-text {
-  opacity: .5;
-  transition: all .3s;
+  opacity: 0.5;
+  transition: all 0.3s;
 }
 .disabled-btn {
-  opacity: .5;
-  transition: all .3s;
+  opacity: 0.5;
+  transition: all 0.3s;
 }
 .reset-btn,
 .copy-btn {
@@ -373,15 +398,15 @@ main p.error-message {
 .stepTwo div button.prev-btn,
 .stepTwo div button.next-btn {
   background-color: rgb(48, 169, 179);
-  border: 1px solid rgb(0,0,0);
-  padding: .25em 0.75rem .5em;;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0.25em 0.75rem 0.5em;
   width: auto;
 }
 .stepTwo div button.prev-btn:hover,
 .stepTwo div button.next-btn:hover {
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb( 48, 169, 179);
-  color: rgb( 48, 169, 179);
+  border: 1px solid rgb(48, 169, 179);
+  color: rgb(48, 169, 179);
 }
 .prev-btn,
 .reset-btn {
@@ -404,3 +429,6 @@ footer p {
     padding: 1em 3em;
   }
 } */
+.fade {
+  opacity: 0.5;
+}

@@ -34,15 +34,26 @@
           <div id="vanishingContent" v-if="displayCard === 'stepOne'">
             <header>
               <h1>Creuz your way through data</h1>
-              <p>Need to split a big list of values for use in Pardot dynamic lists or Salesforce report filters? We got you covered.</p>
+              <p>
+                Need to split a big list of values for use in Pardot dynamic
+                lists or Salesforce report filters? We got you covered.
+              </p>
               <ol>
                 <li>Paste Your Text</li>
-                <li>Select Data Chunk Size. <br /><span>(250 characters - for Pardot, 1000 characters - for&nbsp;Salesforce)</span></li>
+                <li>
+                  Select Data Chunk Size. <br /><span
+                    >(250 characters - for Pardot, 1000 characters -
+                    for&nbsp;Salesforce)</span
+                  >
+                </li>
                 <li>Select Data Manipulation. <span>(optional)</span></li>
                 <li>Split my data!</li>
               </ol>
-              <p>Don't have a list yet, but want to take a test drive?<br />
-                <a href="#" @click.prevent="loadSampleData()">Click here to try with sample data</a> this is more text.
+              <p>
+                Don't have a list yet, but want to take a test drive?<br />
+                <a href="#" @click.prevent="loadSampleData()">
+                  Click here to try with sample data
+                </a>
               </p>
               <span>SFDC Report Line Splitter / Pardot Dynamic lists</span>
             </header>
@@ -60,27 +71,29 @@
                 Data' button. You can try the sample data as well just to see
                 this work
               </p> -->
-              <div class="button-frame">
+              <div id="buttonFrame" class="button-frame">
                 <label
-                for="transformDataOptions"
-                class="custom-select custom-select_transfrom-data"
+                  for="dataManipulationSelect"
+                  class="custom-select custom-select_transfrom-data"
                 >
-                <select v-model="transformOption">
-                  <option disabled value="">Data Manipulation</option>
-                  <template v-for="(option, index) in transformDataOptions">
-                    <option :key="index">{{ option }}</option>
-                  </template>
-                </select>
+                  <select id="dataManipulationSelect" v-model="transformOption">
+                    <option disabled value="">Data Manipulation</option>
+                    <template v-for="(option, index) in transformDataOptions">
+                      <option :key="index">{{ option }}</option>
+                    </template>
+                  </select>
                 </label>
                 <label for="splitSize" class="custom-select">
-                    <select v-model="chunkSize">
-                      <option disabled value="">Data Chunk Size</option>
-                      <template v-for="(data, index) in dataSplitSizeOptions">
-                        <option :key="index">{{ data }}</option>
-                      </template>
-                    </select>
-                  </label>
-                <button @click="checkForData()">Split the Data</button>
+                  <select id="splitSize" v-model="chunkSize">
+                    <option disabled value="">Data Chunk Size</option>
+                    <template v-for="(data, index) in dataSplitSizeOptions">
+                      <option :key="index">{{ data }}</option>
+                    </template>
+                  </select>
+                </label>
+                <button id="split" @click="checkForData()">
+                  Split the Data
+                </button>
               </div>
             </main>
           </div>
@@ -105,55 +118,95 @@
                   </button>
                 </div>
               </div>
-              <textarea id="dataChunk" class="data-chunk-frame" :class="{'disabled-text': textDisabled.includes(`dataChunk${dataChunkIndex}`)}" readonly :value="dataChunk"></textarea>
+              <textarea
+                id="dataChunk"
+                class="data-chunk-frame"
+                :class="{'disabled-text': textDisabled.includes(`dataChunk${dataChunkIndex}`)}"
+                readonly
+                :value="dataChunk"
+              ></textarea>
               <div class="p-xt-1">
                 <button @click="handleReset()" class="reset-btn">
                   Reset
                 </button>
-                <button class="copy-btn" :class="{'disabled-btn': textDisabled.includes(`dataChunk${dataChunkIndex}`)}" @click="handleCopy(dataChunkIndex)">Copy</button>
+                <button
+                  class="copy-btn"
+                  :class="{'disabled-btn': textDisabled.includes(`dataChunk${dataChunkIndex}`)}"
+                  @click="handleCopy(dataChunkIndex)"
+                >
+                  Copy
+                </button>
               </div>
             </div>
             <div class="p-b-2 p-xt-2" v-else>
-                <div class="p-b-2" v-for="(chunk, index) in chunkedDataList">
-                  <textarea :id="'chunk' + index" class="data-chunk-frame" :class="{'disabled-text': textDisabled.includes('chunk' + index)}" readonly :value="chunk"></textarea>
-                  <button @click="handleReset()" class="reset-btn" v-if="index === chunkedDataList.length -1">
-                    Reset
-                  </button>
-                  <button class="copy-btn" :class="{'disabled-btn': textDisabled.includes('chunk' + index)}" @click="handleCopy(index)">Copy</button>
-                </div>
+              <div class="p-b-2" v-for="(chunk, index) in chunkedDataList">
+                <textarea
+                  :id="'chunk' + index"
+                  class="data-chunk-frame"
+                  :class="{'disabled-text': textDisabled.includes('chunk' + index)}"
+                  readonly
+                  :value="chunk"
+                ></textarea>
+                <button
+                  @click="handleReset()"
+                  class="reset-btn"
+                  v-if="index === chunkedDataList.length -1"
+                >
+                  Reset
+                </button>
+                <button
+                  class="copy-btn"
+                  :class="{'disabled-btn': textDisabled.includes('chunk' + index)}"
+                  @click="handleCopy(index)"
+                >
+                  Copy
+                </button>
+              </div>
             </div>
           </div>
           <!--stepTwo-->
         </div>
-        <!--<footer>
+        <!-- <footer>
           <p>&copy; 2019 Sercante</p>
-        </footer>-->
+        </footer> -->
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
       var app = new Vue({
-        el: '#app',
+        el: "#app",
         data: {
-          displayCard: 'stepOne',
-          dataSplitSizeOptions: ['250', '1000'],
-          userData: '',
+          displayCard: "stepOne",
+          dataSplitSizeOptions: ["250", "1000"],
+          userData: "",
           chunkedDataList: [],
           transformDataOptions: [
-            'Add Commas',
-            'Add Semicolons',
-            'Semicolons to Commas',
-            'Commas to Semicolons'
+            "Line Breaks to Commas",
+            "Line Breaks Semicolons",
+            "Semicolons to Commas",
+            "Commas to Semicolons"
           ],
-          transformOption: '',
-          chunkSize: '',
-          dataChunk: '',
+          transformOption: "",
+          chunkSize: "",
+          dataChunk: "",
           dataChunkIndex: -1,
           semiToColon: false,
           formError: false,
-          errorMessage: '',
+          errorMessage: "",
           showAll: false,
-          textDisabled: []
+          textDisabled: [],
+          delimiterAdded: false
+        },
+        mounted: function() {
+          var button = document.getElementById("split");
+          button.disabled = true;
+          button.classList.add("fade");
+          var selectOne = document.getElementById("dataManipulationSelect");
+          selectOne.disabled = true;
+          selectOne.classList.add("fade");
+          var selectTwo = document.getElementById("splitSize");
+          selectTwo.disabled = true;
+          selectTwo.classList.add("fade");
         },
         methods: {
           loadSampleData: function() {
@@ -165,24 +218,24 @@
             this.dataChunkIndex = 0;
             this.checkForCommaOrSemi();
             var originalString = this.userData;
-            var chunk = '';
-            var subString = '';
-            var n = '';
-            this.displayCard = 'stepTwo';
+            var chunk = "";
+            var subString = "";
+            var n = "";
+            this.displayCard = "stepTwo";
             var num = parseInt(this.chunkSize);
             var counter = 0;
             while (originalString.length > 0) {
               chunk = originalString.substring(0, this.chunkSize);
-              if (this.transformOption === 'Semicolons to Commas')
+              if (this.transformOption === "Semicolons to Commas")
                 if (chunk.length >= this.chunkSize) {
-                  n = chunk.lastIndexOf(',');
+                  n = chunk.lastIndexOf(",");
                 } else {
                   n = chunk.length;
                 }
 
-              if (this.transformOption === 'Commas to Semicolons')
+              if (this.transformOption === "Commas to Semicolons")
                 if (chunk.length >= this.chunkSize) {
-                  n = chunk.lastIndexOf(';');
+                  n = chunk.lastIndexOf(";");
                 } else {
                   n = chunk.length;
                 }
@@ -191,7 +244,8 @@
               this.chunkedDataList.push(originalString.substring(0, n));
               originalString = originalString
                 .substring(n)
-                .replace(/(^,)|(^;)|(;$)|(,$)/, '').trim();
+                .replace(/(^,)|(^;)|(;$)|(,$)/, "")
+                .trim();
               counter++;
               if (counter >= 100 || originalString.length === 0) {
                 break;
@@ -201,25 +255,27 @@
           checkForData: function() {
             if (!this.userData) {
               this.formError = true;
-              this.errorMessage = 'Silly human. No data. No data spliting';
+              this.errorMessage = "Silly human. No data. No data spliting";
             } else if (!this.chunkSize) {
               this.formError = true;
-              this.errorMessage = 'Please select a charater limit value';
+              this.errorMessage = "Please select a charater limit value";
             } else {
               this.chunkTheData();
             }
           },
           checkForCommaOrSemi: function() {
             for (char of this.userData) {
-              if (char === ',') {
-                this.transformOption = 'Semicolons to Commas';
+              if (char === ",") {
+                this.transformOption = "Semicolons to Commas";
               }
-              if (char === ';') {
-                this.transformOption = 'Commas to Semicolons';
+              if (char === ";") {
+                this.transformOption = "Commas to Semicolons";
               }
             }
           },
           addDelimiter: function(char) {
+            this.delimiterAdded = true;
+            // this.transformDataOptions.splice(0, 2);
             this.userData = this.userData.replace(/(\r\n|\n|\r)/gm, `${char} `);
             /* const txtValue = this.userData.split("")
             console.log(txtValue)
@@ -238,35 +294,35 @@
             } */
           },
           changeSemicolonToComma: function() {
-            this.userData = this.userData.replace(/;/g, ',');
+            this.userData = this.userData.replace(/;/g, ",");
             //this.semiToColon = true;
             // this.displayCard = 'stepTwo';
           },
           changeCommaToSemicolon: function() {
-            this.userData = this.userData.replace(/,/g, ';');
+            this.userData = this.userData.replace(/,/g, ";");
             //this.semiToColon = true;
             //this.displayCard = 'stepTwo';
           },
           handleReset: function() {
-            this.displayCard = 'stepOne';
-            this.chunkSize = '';
-            this.userData = '';
-            this.transformOption = '';
+            this.displayCard = "stepOne";
+            this.chunkSize = "";
+            this.userData = "";
+            this.transformOption = "";
             this.chunkedDataList = [];
             this.dataChunkIndex = -1;
-            this.dataChunk = '',
-            this.showAll = false,
-            this.semiToColon = false,
-            this.formError = false,
-            this.errorMessage = [],
-            this.textDisabled = []
+            (this.dataChunk = ""),
+              (this.showAll = false),
+              (this.semiToColon = false),
+              (this.formError = false),
+              (this.errorMessage = []),
+              (this.textDisabled = []);
           },
           handleNext: function() {
             if (this.dataChunkIndex < this.chunkedDataList.length - 1) {
               this.dataChunkIndex += 1;
-             // this.textDisabled = [];
+              // this.textDisabled = [];
             } else {
-              return
+              return;
             }
           },
           handlePrev: function() {
@@ -274,30 +330,30 @@
               this.dataChunkIndex -= 1;
               //this.textDisabled = [];
             } else {
-              return
+              return;
             }
           },
-          handleCopy: function( index ) {
+          handleCopy: function(index) {
             if (!this.showAll) {
-              var text = document.querySelector('#dataChunk')
-              text.setAttribute('type', 'text')
-              text.select()
+              var text = document.querySelector("#dataChunk");
+              text.setAttribute("type", "text");
+              text.select();
               this.textDisabled.push(`dataChunk${index}`);
             } else {
-              var text = document.querySelector(`#chunk${index}`)
-              text.setAttribute('type', 'text')
-              text.select()
-              this.textDisabled.push(`chunk${index}`)
+              var text = document.querySelector(`#chunk${index}`);
+              text.setAttribute("type", "text");
+              text.select();
+              this.textDisabled.push(`chunk${index}`);
             }
             try {
-              var successful = document.execCommand('copy');
-              var msg = successful ? 'successful' : 'unsuccessful';
-              console.log('Testing code was copied ' + msg);
+              var successful = document.execCommand("copy");
+              var msg = successful ? "successful" : "unsuccessful";
+              console.log("Testing code was copied " + msg);
             } catch (err) {
-              console.log('Oops, unable to copy');
+              console.log("Oops, unable to copy");
             }
-            text.setAttribute('type', 'hidden')
-            window.getSelection().removeAllRanges()
+            text.setAttribute("type", "hidden");
+            window.getSelection().removeAllRanges();
           }
         },
         watch: {
@@ -309,26 +365,51 @@
           userData: function() {
             if (this.userData) {
               this.formError = false;
+              var button = document.getElementById("split");
+              button.disabled = false;
+              button.classList.remove("fade");
+              var selectOne = document.getElementById("dataManipulationSelect");
+              selectOne.disabled = false;
+              selectOne.classList.remove("fade");
+              var selectTwo = document.getElementById("splitSize");
+              selectTwo.disabled = false;
+              selectTwo.classList.remove("fade");
+            } else {
+              var button = document.getElementById("split");
+              button.disabled = true;
+              button.classList.add("fade");
+              var selectOne = document.getElementById("dataManipulationSelect");
+              selectOne.disabled = true;
+              selectOne.classList.add("fade");
+              var selectTwo = document.getElementById("splitSize");
+              selectTwo.disabled = true;
+              selectTwo.classList.add("fade");
             }
           },
           dataChunkIndex: function() {
             this.dataChunk = this.chunkedDataList[this.dataChunkIndex];
           },
           transformOption: function() {
-            switch (this.transformOption) {
-              case 'Add Commas':
-                this.addDelimiter(',');
-                break;
-              case 'Add Semicolons':
-                this.addDelimiter(';');
-                break;
-              case 'Commas to Semicolons':
-                this.changeCommaToSemicolon();
-                break;
-              case 'Semicolons to Commas':
-                this.changeSemicolonToComma();
-                break;
-              default:
+            if (this.userData !== "") {
+              switch (this.transformOption) {
+                case "Line Breaks to Commas":
+                  this.addDelimiter(",");
+                  break;
+                case "Line Breaks to Semicolons":
+                  this.addDelimiter(";");
+                  break;
+                case "Commas to Semicolons":
+                  this.changeCommaToSemicolon();
+                  break;
+                case "Semicolons to Commas":
+                  this.changeSemicolonToComma();
+                  break;
+                default:
+              }
+            } else {
+              this.formError = true;
+              this.errorMessage =
+                "Please enter data into the text feild before trying to manipulating it.";
             }
           }
         }
