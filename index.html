@@ -41,7 +41,9 @@
                 <li>Select Data Manipulation. <span>(optional)</span></li>
                 <li>Split my data!</li>
               </ol>
-              <p>Don't have a list yet, but want to take a test drive?<br /><a href="#" @click.prevent="loadSampleData()">Click here to try with sample data</a>.</p>
+              <p>Don't have a list yet, but want to take a test drive?<br />
+                <a href="#" @click.prevent="loadSampleData()">Click here to try with sample data</a> this is more text.
+              </p>
               <span>SFDC Report Line Splitter / Pardot Dynamic lists</span>
             </header>
             <main>
@@ -123,9 +125,9 @@
           </div>
           <!--stepTwo-->
         </div>
-        <footer>
-          <!-- <p>&copy; 2019 Sercante</p> -->
-        </footer>
+        <!--<footer>
+          <p>&copy; 2019 Sercante</p>
+        </footer>-->
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -138,6 +140,8 @@
           userData: '',
           chunkedDataList: [],
           transformDataOptions: [
+            'Add Commas',
+            'Add Semicolons',
             'Semicolons to Commas',
             'Commas to Semicolons'
           ],
@@ -214,6 +218,24 @@
                 this.transformOption = 'Commas to Semicolons';
               }
             }
+          },
+          addDelimiter: function(char) {
+            this.userData = this.userData.replace(/(\r\n|\n|\r)/gm, `${char} `);
+            /* const txtValue = this.userData.split("")
+            console.log(txtValue)
+            let idx = txtValue.indexOf("\n")
+            console.log('idx', idx)
+            while (idx !== -1) {
+              if (txtValue[idx - 1] !== char) {
+                txtValue[idx] = char
+              } else {
+                txtValue.splice(idx, 1);
+                console.log("txt" + txtValue.indexOf("\n"))
+              }
+              console.log(txtValue.join())
+              this.userData = txtValue.join("")
+              idx = txtValue.indexOf("\n")
+            } */
           },
           changeSemicolonToComma: function() {
             this.userData = this.userData.replace(/;/g, ',');
@@ -294,6 +316,12 @@
           },
           transformOption: function() {
             switch (this.transformOption) {
+              case 'Add Commas':
+                this.addDelimiter(',');
+                break;
+              case 'Add Semicolons':
+                this.addDelimiter(';');
+                break;
               case 'Commas to Semicolons':
                 this.changeCommaToSemicolon();
                 break;

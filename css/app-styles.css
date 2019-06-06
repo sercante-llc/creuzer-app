@@ -72,7 +72,7 @@ button:hover {
 .creuzer-app-frame {
   background-color: #ffffff;
   background-color: rgb(255, 255, 255);
-  border: 4px solid rgb(33, 186, 64);
+  border: 3px solid rgb(33, 186, 64);
   border-radius: 0.5em;
   -moz-box-shadow: 0px 0px 4px 1px #000000;
   -webkit-box-shadow: 0px 0px 4px 1px #000000;
@@ -114,7 +114,7 @@ header h1 {
 }
 
 header p:last-of-type {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 header span {
   display: block;
@@ -166,15 +166,23 @@ header ol li span {
   text-align: left;
 }
 header a {
-  border-bottom: 1px solid rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  display: inline-block;
-  padding-bottom: .1em;
   text-decoration: none;
-  transition: border .2s ease-in-out;
+}
+header a::after {
+  border-radius: 1em;
+  border-top: .1em solid rgb(0, 0, 0);
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: right .4s cubic-bezier(0,.5,0,5);
 }
 header a:hover {
-  border-bottom: 1px solid rgb(88, 88, 88);
+  text-decoration: none;
+}
+header a:hover::after {
+  right: 0;
 }
 
 @media screen and (min-width: 500px) {
@@ -252,11 +260,11 @@ main select {
 main select::-ms-expand { /* for IE 11 */
     display: none;
 }
-main .custom-select:after {
+main .custom-select::after {
   position: absolute;
   font-size: 1.25em;
   right: 10px;
-  top: 4px;
+  top: 7px;
   width: 1em;
   content: '\2228';
   text-align: center;
@@ -381,8 +389,9 @@ main p.error-message {
 }
 
 /*_______________________ footer _______________________*/
-footer {
+/* footer {
   background-color: rgb(255, 255, 255);
+  border-radius: 0.5em;
   font-size: 0.8em;
   padding: 1em 1.55em;
 }
@@ -394,4 +403,4 @@ footer p {
   footer {
     padding: 1em 3em;
   }
-}
+} */
