@@ -7,7 +7,7 @@ font-family: 'Caveat', cursive;*/
 }
 body {
   background: rgb(2, 42, 56);
-  color: rgb(0, 0, 0);
+  color: rgb(66, 66, 66);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -67,7 +67,31 @@ button:hover {
 .align-right {
   text-align: right;
 }
-
+a {
+  color: rgb(66, 66, 66);
+  position: relative;
+  text-decoration: none;
+  transition: color 0.4s ease-out;
+}
+a::after {
+  border-radius: 1em;
+  border-top: 0.1em solid rgb(66, 66, 66);
+  content: "";
+  position: absolute;
+  right: 100%;
+  bottom: -0.14em;
+  left: 0;
+  transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
+}
+a:hover {
+  color: rgb(33, 186, 64);
+  text-decoration: none;
+}
+a:hover::after {
+  border-color: rgb(33, 186, 64);
+  /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
+  right: 0;
+}
 /*_______________________ animations _______________________*/
 /* @keyframes anchor-underline {
   0%, 10% {
@@ -83,6 +107,22 @@ button:hover {
     right: 0;
   }
 } */
+.fade-enter-active {
+  transition: opacity 1s;
+}
+.fade-leave-active {
+  transition: opacity 0.4s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.fadeSlow-enter-active,
+.fadeSlow-leave-active {
+  transition: opacity 0.6s 0.2s;
+}
+.fadeSlow-enter, .fadeSlow-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 
 /*_______________________ app framing _______________________*/
 .creuzer-app-frame {
@@ -127,7 +167,7 @@ header h1 {
 }
 
 header p:last-of-type {
-  margin-bottom: 1em;
+  margin-bottom: 1.25em;
 }
 header span {
   display: block;
@@ -157,21 +197,25 @@ header ol li:nth-child(1)::before {
   display: inline-block;
   content: "Step 1:";
   margin-right: 0.8em;
+  color: rgb(0, 0, 0);
 }
 header ol li:nth-child(2)::before {
   display: inline-block;
   content: "Step 2:";
   margin-right: 0.8em;
+  color: rgb(0, 0, 0);
 }
 header ol li:nth-child(3)::before {
   display: inline-block;
   content: "Step 3:";
   margin-right: 0.8em;
+  color: rgb(0, 0, 0);
 }
 header ol li:nth-child(4)::before {
   display: inline-block;
   content: "Step 4:";
   margin-right: 0.8em;
+  color: rgb(0, 0, 0);
 }
 header ol li:last-of-type {
   padding-bottom: 0;
@@ -181,32 +225,6 @@ header ol li span {
   font-size: 0.8em;
   text-align: left;
 }
-header a {
-  color: rgb(0, 0, 0);
-  position: relative;
-  text-decoration: none;
-  transition: color 0.4s ease-out;
-}
-header a::after {
-  border-radius: 1em;
-  border-top: 0.1em solid rgb(0, 0, 0);
-  content: "";
-  position: absolute;
-  right: 100%;
-  bottom: -0.14em;
-  left: 0;
-  transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
-}
-header a:hover {
-  color: rgb(33, 186, 64);
-  text-decoration: none;
-}
-header a:hover::after {
-  border-color: rgb(33, 186, 64);
-  /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
-  right: 0;
-}
-
 @media screen and (min-width: 500px) {
   header h1 {
     font-size: 2.5em;
@@ -429,6 +447,20 @@ footer p {
     padding: 1em 3em;
   }
 } */
-.fade {
-  opacity: 0.5;
+
+.clear-btn-frame {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0.2em;
+}
+.clear-btn {
+  background-color: rgb(88, 88, 88);
+  font-size: 0.8em;
+  width: auto;
+  padding: 0.3em 0.5em;
+  margin: 0;
+}
+.clear-btn:hover {
+  border-color: rgb(88, 88, 88);
+  color: rgb(88, 88, 88);
 }
