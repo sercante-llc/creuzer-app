@@ -260,7 +260,7 @@ main textarea {
   padding: 0.75em 1em;
   width: 99%;
 }
-/* main .drop-down-frame {
+main .drop-down-frame {
   display: flex;
   align-content: flex-end;
   justify-content: flex-end;
@@ -319,10 +319,6 @@ main .custom-select:hover {
 main .custom-select:hover:after {
   color: rgb(48, 169, 179);
 }
-main select option {
-  background-color: rgb(48, 169, 179);
-  font-size: 3em;
-} */
 
 main p {
   margin-top: 2.5em;
