@@ -371,11 +371,11 @@ main p.error-message {
   border-bottom: 1px solid rgb(88, 88, 88);
 }
 .disabled-text {
-  opacity: 0.5;
+  opacity: 0.2;
   transition: all 0.3s;
 }
 .disabled-btn {
-  opacity: 0.5;
+  opacity: 0.2;
   transition: all 0.3s;
 }
 .reset-btn,
