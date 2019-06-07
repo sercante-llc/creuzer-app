@@ -322,7 +322,9 @@ main .custom-select:hover {
 main .custom-select:hover::after {
   color: rgb(48, 169, 179);
 }
-
+main select option {
+  color: #000000;
+}
 main p {
   margin-top: 2.5em;
   padding: 0 0.25em;
