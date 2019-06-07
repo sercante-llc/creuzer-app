@@ -260,7 +260,7 @@ main textarea {
   padding: 0.75em 1em;
   width: 99%;
 }
-main .drop-down-frame {
+/* main .drop-down-frame {
   display: flex;
   align-content: flex-end;
   justify-content: flex-end;
@@ -323,7 +323,7 @@ main .custom-select:hover:after {
 main select option {
   background-color: rgb(48, 169, 179);
   font-size: 3em;
-}
+} */
 
 main p {
   margin-top: 2.5em;
@@ -453,14 +453,8 @@ footer p {
   justify-content: flex-end;
   padding-right: 0.2em;
 }
-.clear-btn {
-  background-color: rgb(88, 88, 88);
-  font-size: 0.8em;
-  width: auto;
-  padding: 0.3em 0.5em;
-  margin: 0;
-}
-.clear-btn:hover {
-  border-color: rgb(88, 88, 88);
-  color: rgb(88, 88, 88);
+@supports (-ms-ime-align: auto) {
+  .clear-btn-frame {
+    margin-top: 0.5em;
+  }
 }
