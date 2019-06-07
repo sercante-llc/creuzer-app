@@ -5,6 +5,9 @@ font-family: 'Caveat', cursive;*/
 * {
   box-sizing: border-box;
 }
+v-cloak {
+  display: none;
+}
 body {
   background: rgb(2, 42, 56);
   color: rgb(66, 66, 66);
