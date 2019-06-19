@@ -33,18 +33,19 @@
           <!--stepOne-->
           <div id="vanishingContent" v-if="displayCard === 'stepOne'">
             <header>
-              <!-- <h1>Creuz your way through data</h1> -->
+              <h1>Creuz Your Way Through Data:</h1>
+              <h2>Split Values for Use in Pardot & Salesforce Rule Criteria</h2>
               <p>
                 Need to split a big list of values for use in Pardot dynamic
                 lists or Salesforce report filters? We got you covered.
               </p>
               <ol>
-                <li>Paste Your Text</li>
+                <li>Paste Your Text in the Box Below</li>
                 <li>
-                  Select Data Chunk Size. <br /><span
-                    >(250 characters - for Pardot, 1000 characters -
-                    for&nbsp;Salesforce)</span
-                  >
+                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Maniputation' and pick the update needed.</span
+                </li>
+                <li>
+                  Select Data Chunk Size. (250 characters - for Pardot, 1000 characters - for Salesforce)
                 </li>
                 <li>Split my data!</li>
               </ol>
@@ -77,8 +78,7 @@
                 Data' button. You can try the sample data as well just to see
                 this work
               </p> -->
-              <transition name="fadeSlow">
-                <div id="buttonFrame" class="button-frame" v-if="userData">
+                <div id="buttonFrame" class="button-frame" >
                   <label
                     for="dataManipulationSelect"
                     class="custom-select custom-select_transfrom-data"
@@ -105,7 +105,6 @@
                     Split the Data
                   </button>
                 </div>
-              </transition>
             </main>
           </div>
           <!--/stepOne-->

@@ -22,8 +22,8 @@ img {
   width: 100%;
 }
 button {
-  background-color: rgb(236, 72, 118);
-  border: 1px solid rgb(0, 0, 0);
+  background-color: rgb(0, 178, 100);
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 0.25em;
   color: rgb(255, 255, 255);
   cursor: pointer;
@@ -37,8 +37,8 @@ button {
 }
 button:hover {
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(236, 72, 118);
-  color: rgb(236, 72, 118);
+  border: 2px solid rgb(0, 178, 100);
+  color: rgb(0, 178, 100);
 }
 
 /*_______________________ generic classes _______________________*/
@@ -71,6 +71,7 @@ button:hover {
 }
 a {
   color: rgb(66, 66, 66);
+  font-weight: 400;
   position: relative;
   text-decoration: none;
   transition: color 0.4s ease-out;
@@ -85,11 +86,16 @@ a::after {
   left: 0;
   transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
 }
-a:hover {
+a:hover, a:focus {
   color: rgb(33, 186, 64);
   text-decoration: none;
 }
 a:hover::after {
+  border-color: rgb(33, 186, 64);
+  /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
+  right: 0;
+}
+a:hover::after, a:focus::after {
   border-color: rgb(33, 186, 64);
   /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
   right: 0;
@@ -130,7 +136,7 @@ a:hover::after {
 .creuzer-app-frame {
   background-color: #ffffff;
   background-color: rgb(255, 255, 255);
-  border: 3px solid rgb(33, 186, 64);
+  border: 3px solid rgb(149, 244, 168);
   border-radius: 0.5em;
   -moz-box-shadow: 0px 0px 4px 1px #000000;
   -webkit-box-shadow: 0px 0px 4px 1px #000000;
@@ -161,14 +167,19 @@ a:hover::after {
 
 /*_______________________ header _______________________*/
 header h1 {
-  font-family: "Caveat", cursive;
   font-size: 2em;
   line-height: 1;
   margin: 0;
+  margin-top: .5em;
   text-align: left;
+}
+header h2 {
+  margin-top: .25em;
+  margin-bottom: 1em;
 }
 
 header p:last-of-type {
+  font-weight: 600;
   margin-bottom: 1.25em;
 }
 header span {
@@ -276,7 +287,7 @@ main .custom-select {
   min-width: 180px;
   position: relative;
   border: 1px solid rgb(0, 0, 0);
-  background-color: rgb(48, 169, 179);
+  background-color: rgb(51, 51, 51);
   border-radius: 0.25em;
   z-index: 10;
 }
@@ -314,13 +325,13 @@ main .custom-select::after {
   text-align: center;
   color: #ffffff;
 }
-main .custom-select:hover {
-  border: 1px solid rgb(48, 169, 179);
+main .custom-select:hover, main .custom-select:focus {
+  border: 2px solid rgb(51, 51, 51);
   background-color: rgb(255, 255, 255);
-  color: rgb(48, 169, 179);
+  color: rgb(51, 51, 51);
 }
-main .custom-select:hover::after {
-  color: rgb(48, 169, 179);
+main .custom-select:hover::after, main .custom-select:focus::after {
+  color: rgb(51, 51, 51);
 }
 main select option {
   color: #000000;
@@ -386,19 +397,19 @@ main p.error-message {
   width: auto;
 }
 .reset-btn {
-  background-color: rgb(48, 169, 179);
+  background-color: rgb(255, 0, 0);
 }
 .reset-btn:hover {
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(48, 169, 179);
-  color: rgb(48, 169, 179);
+  border: 2px solid rgb(255, 0, 0);
+  color: rgb(255, 0, 0);
 }
 .copy-btn {
-  background-color: rgb(236, 72, 118);
+  background-color: rgb(0, 178, 100);
 }
-.copy-btn:hover {
+.copy-btn:hover, .copy-btn:focus {
   background-color: rgb(255, 255, 255);
-  color: rgb(236, 72, 118);
+  color: rgb(0, 178, 100);
 }
 .data-chunk-frame {
   border-radius: 0.25em;
@@ -415,7 +426,7 @@ main p.error-message {
 }
 .stepTwo div button.prev-btn,
 .stepTwo div button.next-btn {
-  background-color: rgb(48, 169, 179);
+  background-color: rgb(51, 51, 51);
   border: 1px solid rgb(0, 0, 0);
   padding: 0.25em 0.75rem 0.5em;
   width: auto;
@@ -423,8 +434,8 @@ main p.error-message {
 .stepTwo div button.prev-btn:hover,
 .stepTwo div button.next-btn:hover {
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(48, 169, 179);
-  color: rgb(48, 169, 179);
+  border: 1px solid rgb(51, 51, 51);
+  color: rgb(51, 51, 51);
 }
 .prev-btn,
 .reset-btn {
@@ -452,6 +463,23 @@ footer p {
   display: flex;
   justify-content: flex-end;
   padding-right: 0.2em;
+}
+.clear-btn-frame a {
+  color: rgb(255, 0, 0);
+}
+.clear-btn-frame a:hover, a:focus {
+  color: rgb(255, 0, 0);
+  text-decoration: none;
+}
+.clear-btn-frame a:hover::after {
+  border-color: rgb(255, 0, 0);
+  /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
+  right: 0;
+}
+.clear-btn-frame a:hover::after, a:focus::after {
+  border-color: rgb(255, 0, 0);
+  /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
+  right: 0;
 }
 @supports (-ms-ime-align: auto) {
   .clear-btn-frame {
