@@ -176,6 +176,13 @@
                 >
                   Start Over
                 </button>
+                <button
+                  class="copy-btn"
+                  :class="{'disabled-btn': textDisabled.includes('chunk' + index)}"
+                  @click="handleCopy(index)"
+                >
+                  Copy
+                </button>
               </div>
             </div>
           </div>
