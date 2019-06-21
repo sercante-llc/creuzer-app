@@ -33,8 +33,7 @@
           <!--stepOne-->
           <div id="vanishingContent" v-if="displayCard === 'stepOne'">
             <header>
-              <h1>Creuz Your Way Through Data:</h1>
-              <h2>Split Values for Use in Pardot & Salesforce Rule Criteria</h2>
+              <h1>Split Values for Use in Pardot & Salesforce Rule Criteria</h1>
               <p>
                 Need to split a big list of values for use in Pardot dynamic
                 lists or Salesforce report filters? We got you covered.
@@ -42,19 +41,19 @@
               <ol>
                 <li>Paste Your Text in the Box Below</li>
                 <li>
-                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Manipulation' and pick the update needed.</span
+                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Manipulation' and pick the update needed.</span>
                 </li>
                 <li>
                   Select Field Size Limit. (250 characters - for Pardot, 1000 characters - for Salesforce)
                 </li>
                 <li>Split my data!</li>
               </ol>
-              <p>
+              <!-- <p>
                 Don't have a list yet, but want to take a test&nbsp;drive?<br />
                 <a href="#" @click.prevent="loadSampleData()">
                   Click here to try with sample data
                 </a>
-              </p>
+              </p> -->
               <span>SFDC Report Line Splitter / Pardot Dynamic lists</span>
             </header>
             <main>
@@ -65,6 +64,12 @@
                   v-model="userData"
                 ></textarea>
               </div>
+              <!-- <p>
+                Don't have a list yet, but want to take a test&nbsp;drive?<br />
+                <a href="#" @click.prevent="loadSampleData()">
+                  Click here to try with sample data
+                </a>
+              </p> -->
               <div class="clear-btn-frame">
                 <transition name="fade">
                   <a href="#" v-if="userData" @click.prevent="userData = ''">
@@ -105,6 +110,12 @@
                     Split the Data
                   </button>
                 </div>
+                <p>
+                Don't have a list yet, but want to take a test&nbsp;drive?<br />
+                <a href="#" @click.prevent="loadSampleData()">
+                  Click here to try with sample data
+                </a>
+              </p>
             </main>
           </div>
           <!--/stepOne-->
@@ -187,12 +198,12 @@
         el: "#app",
         data: {
           displayCard: "stepOne",
-          dataSplitSizeOptions: ["250", "1000"],
+          dataSplitSizeOptions: ["250 (Pardot)", "1000 (SFDC)"],
           userData: "",
           chunkedDataList: [],
           transformDataOptions: [
-            "Line Breaks to Commas (To SFDC)",
-            "Line Breaks to Semicolons (To Pardot)",
+            "Line Breaks to Commas (SFDC)",
+            "Line Breaks to Semicolons (Pardot)",
             "Semicolons to Commas (Pardot to SFDC)",
             "Commas to Semicolons (SFDC to Pardot)"
           ],
@@ -366,10 +377,10 @@
           },
           transformOption: function() {
             switch (this.transformOption) {
-              case "Line Breaks to Commas (To SFDC)":
+              case "Line Breaks to Commas (SFDC)":
                 this.addDelimiter(",");
                 break;
-              case "Line Breaks to Semicolons (To Pardot)":
+              case "Line Breaks to Semicolons (Pardot)":
                 this.addDelimiter(";");
                 break;
               case "Commas to Semicolons (SFDC to Pardot)":
