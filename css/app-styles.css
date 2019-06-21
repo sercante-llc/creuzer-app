@@ -68,14 +68,14 @@ button:hover {
 .align-right {
   text-align: right;
 }
-a {
+main a, .stepTwo a {
   color: rgb(66, 66, 66);
   font-weight: 400;
   position: relative;
   text-decoration: none;
   transition: color 0.4s ease-out;
 }
-a::after {
+main a::after, stepTwo a::after {
   border-radius: 1em;
   border-top: 0.1em solid rgb(66, 66, 66);
   content: "";
@@ -85,16 +85,16 @@ a::after {
   left: 0;
   transition: right 0.4s cubic-bezier(0, 0.5, 0, 1), border-color 0.4s ease-out;
 }
-a:hover, a:focus {
+main a:hover, main a:focus, .stepTwo a:focus, .stepTwo a:hover {
   color: rgb(33, 186, 64);
   text-decoration: none;
 }
-a:hover::after {
+main a:hover::after, .stepTwo a:hover::after {
   border-color: rgb(33, 186, 64);
   /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
   right: 0;
 }
-a:hover::after, a:focus::after {
+main a:hover::after, a:focus::after, .stepTwo a:hover::after, stepTwo a:focus::after {
   border-color: rgb(33, 186, 64);
   /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
   right: 0;
@@ -458,7 +458,7 @@ footer p {
 .clear-btn-frame a {
   color: rgb(255, 0, 0);
 }
-.clear-btn-frame a:hover, a:focus {
+.clear-btn-frame a:hover, .clear-btn-frame a:focus {
   color: rgb(255, 0, 0);
   text-decoration: none;
 }
@@ -467,7 +467,7 @@ footer p {
   /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
   right: 0;
 }
-.clear-btn-frame a:hover::after, a:focus::after {
+.clear-btn-frame a:hover::after, .clear-btn-frame a:focus::after {
   border-color: rgb(255, 0, 0);
   /* animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite; */
   right: 0;
