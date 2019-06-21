@@ -42,10 +42,10 @@
               <ol>
                 <li>Paste Your Text in the Box Below</li>
                 <li>
-                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Maniputation' and pick the update needed.</span
+                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Manipulation' and pick the update needed.</span
                 </li>
                 <li>
-                  Select Data Chunk Size. (250 characters - for Pardot, 1000 characters - for Salesforce)
+                  Select Field Size Limit. (250 characters - for Pardot, 1000 characters - for Salesforce)
                 </li>
                 <li>Split my data!</li>
               </ol>
@@ -95,7 +95,7 @@
                   </label>
                   <label for="splitSize" class="custom-select">
                     <select id="splitSize" v-model="chunkSize">
-                      <option disabled value="">Data Chunk Size</option>
+                      <option disabled value="">Field Size Limit</option>
                       <template v-for="(data, index) in dataSplitSizeOptions">
                         <option :key="index">{{ data }}</option>
                       </template>
@@ -191,10 +191,10 @@
           userData: "",
           chunkedDataList: [],
           transformDataOptions: [
-            "Line Breaks to Commas",
-            "Line Breaks to Semicolons",
-            "Semicolons to Commas",
-            "Commas to Semicolons"
+            "Line Breaks to Commas (To SFDC)",
+            "Line Breaks to Semicolons (To Pardot)",
+            "Semicolons to Commas (Pardot to SFDC)",
+            "Commas to Semicolons (SFDC to Pardot)"
           ],
           transformOption: "",
           chunkSize: "",
@@ -366,16 +366,16 @@
           },
           transformOption: function() {
             switch (this.transformOption) {
-              case "Line Breaks to Commas":
+              case "Line Breaks to Commas (To SFDC)":
                 this.addDelimiter(",");
                 break;
-              case "Line Breaks to Semicolons":
+              case "Line Breaks to Semicolons (To Pardot)":
                 this.addDelimiter(";");
                 break;
-              case "Commas to Semicolons":
+              case "Commas to Semicolons (SFDC to Pardot)":
                 this.changeCommaToSemicolon();
                 break;
-              case "Semicolons to Commas":
+              case "Semicolons to Commas (Pardot to SFDC)":
                 this.changeSemicolonToComma();
                 break;
               default:
