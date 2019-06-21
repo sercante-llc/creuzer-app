@@ -236,14 +236,14 @@
             var counter = 0;
             while (originalString.length > 0) {
               chunk = originalString.substring(0, this.chunkSize);
-              if (this.transformOption === "Semicolons to Commas")
+              if (this.transformOption === "Semicolons to Commas (Pardot to SFDC)")
                 if (chunk.length >= this.chunkSize) {
                   n = chunk.lastIndexOf(",");
                 } else {
                   n = chunk.length;
                 }
 
-              if (this.transformOption === "Commas to Semicolons")
+              if (this.transformOption === "Commas to Semicolons (SFDC to Pardot)")
                 if (chunk.length >= this.chunkSize) {
                   n = chunk.lastIndexOf(";");
                 } else {
@@ -276,10 +276,10 @@
           checkForCommaOrSemi: function() {
             for (char of this.userData) {
               if (char === ",") {
-                this.transformOption = "Semicolons to Commas";
+                this.transformOption = "Semicolons to Commas (Pardot to SFDC)";
               }
               if (char === ";") {
-                this.transformOption = "Commas to Semicolons";
+                this.transformOption = "Commas to Semicolons (SFDC to Pardot)";
               }
             }
           },
@@ -377,16 +377,16 @@
           },
           transformOption: function() {
             switch (this.transformOption) {
-              case "Line Breaks to Commas":
+              case "Line Breaks to Commas (SFDC)":
                 this.addDelimiter(",");
                 break;
-              case "Line Breaks to Semicolons":
+              case "Line Breaks to Semicolons (Pardot)":
                 this.addDelimiter(";");
                 break;
-              case "Commas to Semicolons":
+              case "Commas to Semicolons (SFDC to Pardot)":
                 this.changeCommaToSemicolon();
                 break;
-              case "Semicolons to Commas":
+              case "Semicolons to Commas (Pardot to SFDC)":
                 this.changeSemicolonToComma();
                 break;
               default:
