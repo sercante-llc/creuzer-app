@@ -41,7 +41,7 @@
               <ol>
                 <li>Paste Your Text in the Box Below</li>
                 <li>
-                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Maniputation' and pick the update needed.</span
+                  (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Manipulation' and pick the update needed.</span>
                 </li>
                 <li>
                   Select Data Chunk Size. (250 characters - for Pardot, 1000 characters - for Salesforce)
@@ -198,14 +198,14 @@
         el: "#app",
         data: {
           displayCard: "stepOne",
-          dataSplitSizeOptions: ["250", "1000"],
+          dataSplitSizeOptions: ["250 (Pardot)", "1000 (SFDC)"],
           userData: "",
           chunkedDataList: [],
           transformDataOptions: [
-            "Line Breaks to Commas",
-            "Line Breaks to Semicolons",
-            "Semicolons to Commas",
-            "Commas to Semicolons"
+            "Line Breaks to Commas (SFDC)",
+            "Line Breaks to Semicolons (Pardot)",
+            "Semicolons to Commas (Pardot to SFDC)",
+            "Commas to Semicolons (SFDC to Pardot)"
           ],
           transformOption: "",
           chunkSize: "",
