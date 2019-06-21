@@ -12,7 +12,7 @@ font-family: 'Caveat', cursive;*/
   content: "Loading...";
 }
 body {
-  background: rgb(2, 42, 56);
+  background: rgb(228, 228, 228);
   color: rgb(66, 66, 66);
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -30,9 +30,8 @@ button {
   font-size: 1em;
   margin: 0;
   margin-top: 1em;
-  max-width: 400px;
   padding: 1em 1.25em;
-  transition: all 0.3s;
+  transition: all 0.4s;
   width: 100%;
 }
 button:hover {
@@ -136,7 +135,7 @@ a:hover::after, a:focus::after {
 .creuzer-app-frame {
   background-color: #ffffff;
   background-color: rgb(255, 255, 255);
-  border: 3px solid rgb(149, 244, 168);
+  border: 3px solid rgb(0, 178, 100);
   border-radius: 0.5em;
   -moz-box-shadow: 0px 0px 4px 1px #000000;
   -webkit-box-shadow: 0px 0px 4px 1px #000000;
@@ -178,7 +177,7 @@ header h2 {
   margin-bottom: 1em;
 }
 
-header p:last-of-type {
+header li:last-of-type {
   font-weight: 600;
   margin-bottom: 1.25em;
 }
@@ -243,19 +242,14 @@ header ol li span {
     font-size: 2.5em;
   }
   header p,
-  header ol li {
+  header ol li, p {
     font-size: 1.15em;
   }
   header ol {
     margin-left: 0.75em;
   }
 }
-@media screen and (min-width: 560px) {
-  header h1 {
-    font-size: 3em;
-    margin-bottom: 0;
-  }
-}
+
 /*_______________________ main _______________________*/
 main .textarea-frame {
   text-align: center;
@@ -283,7 +277,7 @@ main .drop-down-frame {
 main .custom-select {
   color: rgb(255, 255, 255);
   display: block;
-  max-width: 400px;
+  margin-top: 1em;
   min-width: 180px;
   position: relative;
   border: 1px solid rgb(0, 0, 0);
@@ -310,7 +304,7 @@ main select {
   line-height: 1;
   font-size: 1em;
   color: inherit;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 main select::-ms-expand {
   display: none;
@@ -361,6 +355,9 @@ main p.error-message {
   main .button-frame > button,
   main .button-frame .custom-select {
     width: 30%;
+  }
+  main .custom-select {
+    margin-right: 1em;
   }
 }
 
