@@ -72,7 +72,7 @@
               </p> -->
               <div class="clear-btn-frame">
                 <transition name="fade">
-                  <a href="#" v-if="userData" @click.prevent="userData = ''">
+                  <a href="#" v-if="userData" @click.prevent="userData = ''; transformOption = ''; chunkSize = '';">
                     Clear Input
                   </a>
                 </transition>
@@ -86,7 +86,8 @@
                 <div id="buttonFrame" class="button-frame" >
                   <label
                     for="dataManipulationSelect"
-                    class="custom-select custom-select_transfrom-data"
+                    class="custom-select"
+                    :class="{'arrow-down': !transformOption}"
                   >
                     <select
                       id="dataManipulationSelect"
@@ -98,7 +99,7 @@
                       </template>
                     </select>
                   </label>
-                  <label for="splitSize" class="custom-select">
+                  <label for="splitSize" class="custom-select" :class="{'arrow-down': !chunkSize}">
                     <select id="splitSize" v-model="chunkSize">
                       <option disabled value="">Data Chunk Size</option>
                       <template v-for="(data, index) in dataSplitSizeOptions">
@@ -175,13 +176,6 @@
                 >
                   Start Over
                 </button>
-                <button
-                  class="copy-btn"
-                  :class="{'disabled-btn': textDisabled.includes('chunk' + index)}"
-                  @click="handleCopy(index)"
-                >
-                  Copy
-                </button>
               </div>
             </div>
           </div>
@@ -209,6 +203,7 @@
           ],
           transformOption: "",
           chunkSize: "",
+          selectedSplitSize: 0,
           dataChunk: "",
           dataChunkIndex: -1,
           semiToColon: false,
@@ -232,25 +227,28 @@
             var subString = "";
             var n = "";
             this.displayCard = "stepTwo";
-            var num = parseInt(this.chunkSize);
+            var num = this.selectedSplitSize;
             var counter = 0;
+            console.log(typeof(num));
+            console.log(num);
             while (originalString.length > 0) {
-              chunk = originalString.substring(0, this.chunkSize);
+              chunk = originalString.substring(0, num);
               if (this.transformOption === "Semicolons to Commas (Pardot to SFDC)")
-                if (chunk.length >= this.chunkSize) {
+                if (chunk.length >= num) {
                   n = chunk.lastIndexOf(",");
                 } else {
                   n = chunk.length;
                 }
 
               if (this.transformOption === "Commas to Semicolons (SFDC to Pardot)")
-                if (chunk.length >= this.chunkSize) {
+                if (chunk.length >= num) {
                   n = chunk.lastIndexOf(";");
                 } else {
                   n = chunk.length;
                 }
 
               originalString.substring(0, n);
+              console.log('originalString:', originalString.substring(0, n))
               this.chunkedDataList.push(originalString.substring(0, n));
               originalString = originalString
                 .substring(n)
@@ -370,6 +368,7 @@
           chunkSize: function() {
             if (this.chunkSize) {
               this.formError = false;
+              this.selectedSplitSize = parseInt(this.chunkSize.slice(0, 4));
             }
           },
           dataChunkIndex: function() {
@@ -390,6 +389,7 @@
                 this.changeSemicolonToComma();
                 break;
               default:
+
             }
           }
         }
