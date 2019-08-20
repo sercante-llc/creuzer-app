@@ -219,7 +219,8 @@
           showAll: false,
           textDisabled: [],
           delimiterAdded: false,
-          additionalDebugToConsole: true
+          additionalDebugToConsole: true,
+          maxChunks: 1000
         },
         methods: {
           loadSampleData: function() {
@@ -267,7 +268,7 @@
                 .replace(/(^,)|(^;)|(;$)|(,$)/, "")
                 .trim();
               counter++;
-              if (counter >= 100 || originalString.length === 0) {
+              if (counter >= this.maxChunks || originalString.length === 0) {
                 break;
               }
             }
