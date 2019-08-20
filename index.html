@@ -218,7 +218,8 @@
           errorMessage: "",
           showAll: false,
           textDisabled: [],
-          delimiterAdded: false
+          delimiterAdded: false,
+          additionalDebugToConsole: true
         },
         methods: {
           loadSampleData: function() {
@@ -236,8 +237,10 @@
             this.displayCard = "stepTwo";
             var num = this.selectedSplitSize;
             var counter = 0;
-            console.log(typeof(num));
-            console.log(num);
+            if(this.additionalDebugToConsole){
+              console.log(typeof(num));
+              console.log(num);
+            }
             while (originalString.length > 0) {
               chunk = originalString.substring(0, num);
               if (this.transformOption === "Semicolons to Commas (Pardot to SFDC)")
@@ -254,9 +257,11 @@
                   n = chunk.length;
                 }
 
-              originalString.substring(0, n);
-              console.log('originalString:', originalString.substring(0, n))
-              this.chunkedDataList.push(originalString.substring(0, n));
+              var chunkedString = originalString.substring(0, n);
+              if(this.additionalDebugToConsole){
+                console.log('chunkedString:', chunkedString)
+              }
+              this.chunkedDataList.push(chunkedString);
               originalString = originalString
                 .substring(n)
                 .replace(/(^,)|(^;)|(;$)|(,$)/, "")
