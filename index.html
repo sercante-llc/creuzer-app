@@ -222,7 +222,7 @@
           delimiterAdded: false,
           additionalDebugToConsole: false,
           maxChunks: 1000,
-          isoCountries: {
+          isoCountries: { // First column all caps, second column how we want the data
 'AD':'Andorra',
 'AE':'United Arab Emirates',
 'AF':'Afghanistan',
@@ -274,7 +274,7 @@
 'CR':'Costa Rica',
 'CU':'Cuba',
 'CV':'Cape Verde',
-'CW':'CuraÃ§ao',
+'CW':'Curaçao',
 'CX':'Christmas Island',
 'CY':'Cyprus',
 'CZ':'Czech Republic',
@@ -514,7 +514,7 @@
 'CRI':'Costa Rica',
 'CUB':'Cuba',
 'CPV':'Cape Verde',
-'CUW':'CuraÃ§ao',
+'CUW':'Curaçao',
 'CXR':'Christmas Island',
 'CYP':'Cyprus',
 'CZE':'Czech Republic',
@@ -702,7 +702,7 @@
 'ZAF':'South Africa',
 'ZMB':'Zambia',
 'ZWE':'Zimbabwe',
-'United States of America':'United States',
+'UNITED STATES OF AMERICA':'United States',
           }
         },
         methods: {
@@ -819,7 +819,7 @@
                     console.log(this.isoCountries[value.toUpperCase()])
                     array[index] = this.isoCountries[value.toUpperCase()];
                 } else {            
-                    console.log(value)
+                    console.log(value, value.toUpperCase())
                     array[index] =  value;
                 }
           },
