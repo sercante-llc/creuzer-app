@@ -44,7 +44,7 @@
                   (Optional): If you need to swap commas, semi-colons, or line breaks... select 'Data Manipulation' and pick the update needed.</span>
                 </li>
                 <li>
-                  Select Data Chunk Size. (250 characters - for Pardot, 1000 characters - for Salesforce)
+                  Select Field Size Limit. (250 characters - for Pardot, 1000 characters - for Salesforce)
                 </li>
                 <li>Split my data!</li>
               </ol>
@@ -101,7 +101,7 @@
                   </label>
                   <label for="splitSize" class="custom-select" :class="{'arrow-down': !chunkSize}">
                     <select id="splitSize" v-model="chunkSize">
-                      <option disabled value="">Data Chunk Size</option>
+                      <option disabled value="">Field Size Limit</option>
                       <template v-for="(data, index) in dataSplitSizeOptions">
                         <option :key="index">{{ data }}</option>
                       </template>
