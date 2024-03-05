@@ -12,22 +12,24 @@ font-family: 'Caveat', cursive;*/
   content: "Loading...";
 }
 body {
-  background: rgb(228, 228, 228);
-  color: rgb(66, 66, 66);
-  font-family: "Roboto", sans-serif;
+  background: #fff;
+  color:#181c22;
+  font-family: "Lato", sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
 img {
   width: 100%;
+  max-width: 140px;
 }
 button {
-  background-color: rgb(0, 178, 100);
-  border: 2px solid rgb(0, 0, 0);
+  background-color: #009270;
+  border: 2px solid #009270;
   border-radius: 0.25em;
   color: rgb(255, 255, 255);
   cursor: pointer;
-  font-size: 1em;
+  font-size: 20px;
+  font-weight: 600;
   margin: 0;
   margin-top: 1em;
   padding: 1em 1.25em;
@@ -35,11 +37,18 @@ button {
   width: 100%;
 }
 button:hover {
-  background-color: rgb(255, 255, 255);
-  border: 2px solid rgb(0, 178, 100);
-  color: rgb(0, 178, 100);
+  background-color:  #0affc6;
+  border: 2px solid #0affc6;
+  color: rgb(24 28 34);
 }
-
+.container {
+    max-width: 1440px;
+	width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
 /*_______________________ generic classes _______________________*/
 .align-self_end {
   align-self: flex-end;
@@ -133,23 +142,21 @@ main a:hover::after, a:focus::after, .stepTwo a:hover::after, stepTwo a:focus::a
 
 /*_______________________ app framing _______________________*/
 .creuzer-app-frame {
-  background-color: #ffffff;
-  background-color: rgb(255, 255, 255);
-  border: 3px solid rgb(0, 178, 100);
-  border-radius: 0.5em;
-  -moz-box-shadow: 0px 0px 4px 1px #000000;
-  -webkit-box-shadow: 0px 0px 4px 1px #000000;
-  box-shadow: 0px 0px 4px 1px #000000;
-  margin: 0 auto;
-  margin-top: 1.5em;
-  max-width: 800px;
-  position: relative;
-  width: 100%;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    max-width: 800px;
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgba(171,190,209,.4);
+    background-color: #fff;
+    margin-bottom: 60px;
 }
 .creuzer-app-matte {
   margin: 1.75em auto;
   margin-top: 0.85em;
-  width: 90%;
+  width: 100%;
 }
 @media screen and (min-width: 500px) {
   .creuzer-app-matte {
@@ -160,17 +167,36 @@ main a:hover::after, a:focus::after, .stepTwo a:hover::after, stepTwo a:focus::a
 /*_______________________ app branding _______________________*/
 .logo-frame {
   margin: 0;
-  max-width: 140px;
+  width: 100%;
+  background-color:#181c22;
   cursor: pointer;
+  padding: 1.5rem;
 }
 
 /*_______________________ header _______________________*/
-header h1 {
-  font-size: 2em;
-  line-height: 1;
+h1 {
+  font-size: 48px;
+  font-family: "Prompt", Sans-serif;
+  font-weight: 600;
+  line-height: 56px;
   margin: 0;
   margin-top: .5em;
-  text-align: left;
+  text-align: center;
+	position: relative;
+	margin-bottom:87px;
+}
+h1:after {
+	content: '';
+    position: absolute;
+    bottom: -47px;
+    left: 50%; 
+    width: 240px;
+    height: 7px;
+    background: #fccbc7;
+	 transform:translate(-50%, -50%);
+}
+.intro-title {
+    padding-top: 60px;
 }
 header h2 {
   margin-top: .25em;
@@ -256,9 +282,6 @@ main .textarea-frame {
 }
 main textarea {
   border-radius: 0.25em;
-  -moz-box-shadow: 0px 2px 6px 2px #cfcfcf;
-  -webkit-box-shadow: 0px 2px 6px 2px #cfcfcf;
-  box-shadow: 0px 2px 6px 2px #cfcfcf;
   color: rgb(88, 88, 88);
   font-size: 1em;
   line-height: 1.5;
@@ -281,20 +304,21 @@ main select {
   width: 100%;
   padding: 1em 0.75em;
   line-height: 1;
-  font-size: 1em;
+  font-size: 20px;
+  font-weight:600;
   color: inherit;
   text-overflow: ellipsis;
   transition: background 0.4s ease-in-out, border 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 main .custom-select {
-  color: rgb(255, 255, 255);
+  color: #0affc6;
   display: block;
   margin-top: 1em;
   min-width: 180px;
   width: 100%;
   position: relative;
-  border: 2px solid rgb(0, 0, 0);
-  background-color: rgb(51, 51, 51);
+  border: 2px solid #181c22;
+  background-color: #181c22;
   border-radius: 0.25em;
   z-index: 10;
 }
@@ -306,19 +330,20 @@ main .arrow-down::after {
   position: absolute;
   font-size: 1em;
   right: 5px;
-  top: 12px;
+  top: 46%;
+  transform: translate(-50%, -50%);
   width: 1em;
   content: "\2228";
   text-align: center;
-  color: #ffffff;
+  color: #0affc6;
 }
 main .custom-select:hover, main .custom-select:focus {
-  border: 2px solid rgb(51, 51, 51);
-  background-color: rgb(255, 255, 255);
-  color: rgb(51, 51, 51);
+    border: 2px solid #0affc6;
+    background-color: #0affc6;
+    color: #181c22;
 }
 main .arrow-down:hover::after, main .arrow-down:focus::after {
-  color: rgb(51, 51, 51);
+  color: #181c22;
 }
 main select option {
   color: #000000;
@@ -434,21 +459,64 @@ main p.error-message {
 }
 
 /*_______________________ footer _______________________*/
-/* footer {
+ footer {
   background-color: rgb(255, 255, 255);
   border-radius: 0.5em;
   font-size: 0.8em;
   padding: 1em 1.55em;
 }
-footer p {
+.footer {
+	font-family:'Prompt', sans-serif;
+	width: 100%;
+  background-color:#181c22;
   margin: 0;
-  text-align: right;
+  cursor: pointer;
+	color:#ffffff;
+	font-size: 20px;
+	padding-bottom: 10px;
+  padding-top: 15px;
+}
+.footer a, .footer p {
+	font-size:20px;	
+	color:#fff;
+	text-decoration:none;
+}
+.footer a:hover {
+	text-decoration:underline;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+
+.col {  
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.col2 {
+    grid-column: span 3;
 }
 @media screen and (min-width: 560px) {
-  footer {
-    padding: 1em 3em;
-  }
-} */
+   .grid-container {
+       grid-template-columns: 2fr 1fr 1fr 1fr; 
+    }
+	.col2, .col {
+		grid-column: span 4;
+		padding-top:0;
+	}
+ footer p {
+		padding-top:0;
+		padding-bottom:0;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	.footer {
+		padding-top:30px;
+	}
+} 
 
 .clear-btn-frame {
   display: flex;
